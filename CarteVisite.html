@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte visite</title>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            width: 300px;
+            height: 40px;
+        }
+
+        h3 {
+            position: absolute;
+            top: 1.5cm;
+            width: 100%;
+            text-align: center;
+            left: 0;
+        }
+
+
+        .titre {
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        #texte_presentation {
+            margin: 2px;
+            position: absolute;
+            top: 2.8cm;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            height: 2cm;
+            overflow: hidden;
+        }
+
+        .canvas {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 7.4cm;
+            width: 11cm;
+            border: 2px solid #000;
+            background-color: #f0f0f0;
+        }
+
+        .carte-visite {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carrousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0.8cm;
+        }
+
+        .carrousel2 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0.8cm;
+        }
+
+        .carrousel img,
+        .carrousel2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .boutons-carrousel {
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .boutons-carrousel_2 {
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .logo_nom {
+            position: absolute;
+            top: 1cm;
+            left: 0;
+            width: 100%;
+            height: 0.8cm;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .zone_logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8cm;
+        }
+
+        .info {
+            text-align: center;
+        }
+
+        .coordonnees {
+            text-align: center;
+            font-size: 0.9em;
+            position: absolute;
+            bottom: 1cm;
+        }
+
+        .coordonnees p {
+            margin: 2px 0;
+        }
+
+        .bouton {
+            padding: 5px 10px;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .bouton_action {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .boutons-action {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #imprimer_carte {
+            background-color: hotpink;
+            border-radius: 10px;
+        }
+
+        .fond_rose {
+            background-color: hotpink;
+            border-radius: 10px;
+        }
+
+        @page {
+            margin: 0;
+        }
+
+        @media print {
+
+            @page {
+                margin: 0;
+            }
+
+
+            /* Masquer tout */
+            body * {
+                visibility: hidden;
+            }
+
+            .carte-visite {
+                width: 11cm;
+                height: 7.4cm;
+            }
+
+            /* Afficher uniquement la carte */
+            .carte-visite,
+            .carte-visite * {
+                visibility: visible;
+            }
+
+            /* Positionner la carte en haut à gauche pour éviter les marges inutiles */
+            .carte-visite {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="titre">Bienvenue sur l'editeur de carte de visite</h1>
+    <div class="canvas">
+        <div class="carte-visite">
+            <div class="carrousel">
+                <img id="image_carte_1" src="image1.jpg" alt="Image de la carte de visite">
+            </div>
+
+
+            <div class="info">
+                <div class="logo_nom">
+                    <div class="zone_logo">
+                        <div class="logo">
+                            <img src="logo.png" alt="Logo de l'entreprise">
+                        </div>
+                        <div class="nom">
+                            <h2>Jean Dupont</h2>
+                        </div>
+                    </div>
+                </div>
+                <h3>Développeur Web</h3>
+                <p id="texte_presentation">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad odio distinctio
+                    ducimus voluptate aut illo, incidunt modi rem pariatur corporis non porro nobis error debitis
+                    reprehenderit. Repudiandae incidunt et architecto.</p>
+            </div>
+            <div class="coordonnees">
+                <p class="tel">Téléphone: +33 1 23 45 67 89</p>
+                <p class="email">Email:</p>
+                <p class="reseaux_sociaux">reseaux sociaux</p>
+            </div>
+            <div class="carrousel2">
+                <img id="image_carte_2" src="image1.jpg" alt="Image de la carte de visite">
+            </div>
+        </div>
+    </div>
+    <div class="boutons-action">
+        <button id="telecharger_carte" class="bouton_action">Télécharger la carte de visite</button>
+        <button id="imprimer_carte" class="bouton_action">Imprimer la carte de visite</button>
+        <button id="change_nom" class="bouton fond_rose">Changer le nom</button>
+        <button id="change_titre" class="bouton fond_rose">Changer le titre</button>
+        <button id="change_presentation" class="bouton fond_rose">Changer le texte de présentation</button>
+        <button id="change_telephone" class="bouton fond_rose">Changer le numéro de téléphone</button>
+        <button id="change_email" class="bouton fond_rose">Changer l'email</button>
+        <button id="change_reseaux_sociaux" class="bouton fond_rose">Changer les réseaux sociaux</button>
+        <button id="change_logo" class="bouton fond_rose">Changer le logo</button>
+    </div>
+    <div class="boutons-carrousel">
+        <button id="prev_image" class="bouton">Haut Précédent</button>
+        <button id="next_image" class="bouton">Haut Suivant</button>
+    </div>
+    <div class="boutons-police">
+        <button id="change_police_Nom" class="bouton">Haut Changer police du titre</button>
+        <button id="change_police_Titre" class="bouton">Haut Changer police du sous-titre</button>
+        <button id="change_police_Presentation" class="bouton">Haut Changer police du texte de présentation </button>
+    </div>
+    <div class="boutons-carrousel_2">
+        <button id="prev_image_2" class="bouton">bas Précédent</button>
+        <button id="next_image_2" class="bouton">bas Suivant</button>
+    </div>
+
+</body>
+
+</html>

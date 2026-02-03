@@ -1,0 +1,12 @@
+que doit faire un outil de création de cdv
+1 on doit faire 2 carrousel 1 en haut et 1 en bas
+il doit y avoir 1 titre éditable
+et un texte éditable
+1 bouton d'impression
+1 bouton d'apercu
+format 10.5 et 7.4
+
+
+bonus: changer la police
+bonus2: changer la couleur de  fond
+langage javascript
