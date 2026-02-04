@@ -330,97 +330,59 @@ const policesDispo = [
 ];
 
 
-/* ------------------------------
-   FONCTION : CHANGER POLICE
------------------------------- */
-
-function changerPolice(selectorElement) {
-    const element = document.querySelector(selectorElement);
-
-    // Empêcher plusieurs zones ouvertes
+function changerPolice(sel) {
     if (document.getElementById("input_temporaire")) return;
 
-    const container = document.createElement("div");
-    container.id = "input_temporaire";
+    const el = document.querySelector(sel),
+          c = Object.assign(document.createElement("div"), { id:"input_temporaire" }),
+          s = document.createElement("select"),
+          b = document.createElement("button");
 
-    // Bande rouge full-width
-    container.style.width = "100%";
-    container.style.flex = "0 0 100%";
-    container.style.background = "#ff0000";
-    container.style.padding = "15px";
-    container.style.marginTop = "10px";
-    container.style.display = "flex";
-    container.style.flexDirection = "column";
-    container.style.alignItems = "stretch";
-    container.style.gap = "10px";
-    container.style.boxSizing = "border-box";
-
-    // Select des polices
-    const select = document.createElement("select");
-    select.style.padding = "10px";
-    select.style.fontSize = "16px";
-    select.style.width = "100%";
-
-    policesDispo.forEach(police => {
-        const option = document.createElement("option");
-        option.value = police;
-        option.textContent = police;
-        option.style.fontFamily = police;
-        select.appendChild(option);
+    Object.assign(c.style, {
+        width:"100%", flex:"0 0 100%", background:"#ff0000",
+        padding:"15px", marginTop:"10px", display:"flex",
+        flexDirection:"column", alignItems:"stretch",
+        gap:"10px", boxSizing:"border-box"
     });
 
-    // Bouton valider
-    const bouton = document.createElement("button");
-    bouton.textContent = "Valider";
-    bouton.style.padding = "10px";
-    bouton.style.fontSize = "16px";
-    bouton.style.width = "100%";
+    Object.assign(s.style, { padding:"10px", fontSize:"16px", width:"100%" });
 
-    bouton.addEventListener("click", () => {
-        element.style.fontFamily = select.value;
-        container.remove();
+    // 🔥 VERSION QUI MARCHE : création manuelle des options
+    policesDispo.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        opt.style.fontFamily = p;   // ✔ fonctionne dans tous les navigateurs
+        s.appendChild(opt);
     });
 
-    container.appendChild(select);
-    container.appendChild(bouton);
+    Object.assign(b.style, { padding:"10px", fontSize:"16px", width:"100%" });
+    b.textContent = "Valider";
 
-    // Ajout dans la div des boutons police
-    document.querySelector(".boutons-police").appendChild(container);
+    b.onclick = () => {
+        el.style.fontFamily = s.value;
+        c.remove();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
-    // Scroll automatique vers la zone rouge
-    setTimeout(() => {
-        container.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
+    c.append(s, b);
+    document.querySelector(".boutons-police").append(c);
+
+    setTimeout(() => c.scrollIntoView({ behavior:"smooth", block:"start" }), 50);
 }
 
 
-/* ------------------------------
-   BOUTONS
------------------------------- */
+// Boutons
+const boutonsPolice = {
+    change_police_Nom: ".nom h2",
+    change_police_Titre: "h3",
+    change_police_Presentation: "#texte_presentation",
+    change_police_Telephone: ".tel",
+    change_police_Email: ".email",
+    change_police_Reseaux: ".reseaux_sociaux"
+};
 
-document.getElementById("change_police_Nom").addEventListener("click", () => {
-    changerPolice(".nom h2");
+Object.entries(boutonsPolice).forEach(([id, sel]) => {
+    const btn = document.getElementById(id);
+    if (btn) btn.onclick = () => changerPolice(sel);
 });
-
-document.getElementById("change_police_Titre").addEventListener("click", () => {
-    changerPolice("h3");
-});
-
-document.getElementById("change_police_Presentation").addEventListener("click", () => {
-    changerPolice("#texte_presentation");
-});
-
-document.getElementById("change_police_Telephone").addEventListener("click", () => {
-    changerPolice(".tel");
-});
-
-document.getElementById("change_police_Email").addEventListener("click", () => {
-    changerPolice(".email");
-});
-
-document.getElementById("change_police_Reseaux").addEventListener("click", () => {
-    changerPolice(".reseaux_sociaux");
-});
-
-
-
