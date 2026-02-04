@@ -103,19 +103,16 @@
             object-fit: cover;
         }
 
-        .boutons-carrousel {
-            left: 50%;
-            transform: translateX(-50%);
+        .boutons-carrousel,
+        .boutons-carrousel_2,
+        .boutons-police {
             display: flex;
+            justify-content: center;
             gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
         }
 
-        .boutons-carrousel_2 {
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
 
         .logo_nom {
             position: absolute;
@@ -215,6 +212,24 @@
             }
 
         }
+
+        @media (max-width: 450px) {
+            .canvas {
+                transform: scale(0.5);
+                transform-origin: top center;
+            }
+
+            button {
+                width: 150px;
+                height: 30px;
+                font-size: 0.7em;
+            }
+
+            .bouton {
+                font-size: 10px;
+                padding: 2px;
+            }
+        }
     </style>
 </head>
 
@@ -254,8 +269,8 @@
         </div>
     </div>
     <div class="boutons-action">
-        <button id="telecharger_carte" class="bouton_action">Télécharger la carte de visite</button>
-        <button id="imprimer_carte" class="bouton_action">Imprimer la carte de visite</button>
+        <button id="telecharger_carte" class="bouton bouton_action">Télécharger la carte de visite</button>
+        <button id="imprimer_carte" class="bouton bouton_action">Imprimer la carte de visite</button>
         <button id="change_nom" class="bouton fond_rose">Changer le nom</button>
         <button id="change_titre" class="bouton fond_rose">Changer le titre</button>
         <button id="change_presentation" class="bouton fond_rose">Changer le texte de présentation</button>
@@ -265,18 +280,29 @@
         <button id="change_logo" class="bouton fond_rose">Changer le logo</button>
     </div>
     <div class="boutons-carrousel">
-        <button id="prev_image" class="bouton">Haut Précédent</button>
-        <button id="next_image" class="bouton">Haut Suivant</button>
+        <button id="prev_image" class="bouton fond_rose">Haut Précédent</button>
+        <button id="next_image" class="bouton fond_rose">Haut Suivant</button>
+        <input type="file" id="uploadImageHaut" accept="image/*">
     </div>
-    <div class="boutons-police">
-        <button id="change_police_Nom" class="bouton">Haut Changer police du titre</button>
-        <button id="change_police_Titre" class="bouton">Haut Changer police du sous-titre</button>
-        <button id="change_police_Presentation" class="bouton">Haut Changer police du texte de présentation </button>
-    </div>
+
     <div class="boutons-carrousel_2">
-        <button id="prev_image_2" class="bouton">bas Précédent</button>
-        <button id="next_image_2" class="bouton">bas Suivant</button>
+        <button id="prev_image_2" class="bouton fond_rose">bas Précédent</button>
+        <button id="next_image_2" class="bouton fond_rose">bas Suivant</button>
+        <input type="file" id="uploadImageBas" accept="image/*">
     </div>
+
+<div class="boutons-police">
+    <button id="change_police_Nom" class="bouton">Haut Changer police du titre</button>
+    <button id="change_police_Titre" class="bouton">Haut Changer police du sous-titre</button>
+    <button id="change_police_Presentation" class="bouton">Haut Changer police du texte de présentation </button>
+
+    <!-- 👉 AJOUT ICI -->
+    <button id="change_police_Telephone" class="bouton">Changer police du téléphone</button>
+    <button id="change_police_Email" class="bouton">Changer police de l'email</button>
+    <button id="change_police_Reseaux" class="bouton">Changer police des réseaux sociaux</button>
+</div>
+
+
 
 </body>
 
