@@ -4,173 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Carte de visite recto-verso</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px;
-            gap: 30px;
-        }
-
-        .card {
-            position: relative;
-            width: 322px;
-            height: 208px;
-            border: 6px solid black;
-            border-radius: 6px;
-            overflow: hidden;
-            background: white;
-        }
-
-        /* ---------------- RECTO ---------------- */
-
-        .recto {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .recto .zone {
-            width: 100%;
-            height: 20%; /* 5 zones identiques */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.35);
-        }
-
-        .recto img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-            display: block;
-        }
-
-        .recto input[type="file"] {
-            display: none;
-        }
-
-        /* ---------------- VERSO ---------------- */
-
-        .verso-bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .verso-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; /* on remonte tout */
-            align-items: center;
-
-            padding-top: 25px; /* remonte le bloc */
-            box-sizing: border-box;
-        }
-
-        /* Zone centrale resserrée à 30% */
-        .verso-inner {
-            width: 100%;
-            height: 30%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Ligne Téléphone 1 + Téléphone 2 */
-        .tel-row {
-            width: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .tel-row input {
-            width: 50%;
-        }
-
-        /* Zones de texte transparentes + police script + ombre */
-        .verso-content input {
-            padding: 4px;
-            font-size: 14px;
-            border: none;
-            outline: none;
-            background: transparent;
-            color: black;
-            text-align: center;
-            font-family: "Brush Script MT", "Lucida Handwriting", cursive;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-        }
-
-        /* Mentions légales rehaussées */
-        .mentions-bottom {
-            position: absolute;
-            bottom: 25px; /* rehaussé */
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        #versoFile {
-            display: none;
-        }
-
-        .upload-btn {
-            cursor: pointer;
-            font-size: 12px;
-            background: #ddd;
-            padding: 6px 10px;
-            border-radius: 4px;
-            margin-bottom: 6px;
-            z-index: 3;
-            position: relative;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rakkas&family=Amatic+SC:wght@700&family=Kalam:wght@400;700&family=Merienda:wght@700&family=Ubuntu:wght@400;700&family=Zilla+Slab+Highlight&family=Rubik+Dirt&family=Rubik+Wet+Paint&family=Bungee+Shade&family=Fredericka+the+Great&family=Playfair+Display&family=Lora&family=Merriweather&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Indie+Flower&family=Caveat:wght@700&family=Dancing+Script:wght@700&family=Great+Vibes&family=Pacifico&family=Satisfy&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
+    <!-- PANEL DE CONTROLE -->
+    <div class="color-panel">
+
+        <!-- Bouton pour changer le fond -->
+        <label class="bg-btn">
+            🖼️ Fond
+            <input id="versoFile" type="file" accept="image/*">
+        </label>
+
+        <!-- Boutons de couleurs cycliques -->
+        <div class="color-cycle" data-target="extra">🎨 Extra</div>
+        <div class="color-cycle" data-target="tel1">🎨 Tel 1</div>
+        <div class="color-cycle" data-target="tel2">🎨 Tel 2</div>
+        <div class="color-cycle" data-target="site">🎨 Mail</div>
+        <div class="color-cycle" data-target="mentions">🎨 Mentions</div>
+
+        <!-- BOUTONS POLICE PAR CHAMP -->
+        <div class="font-btn" data-field="extra">🔤 Police Extra</div>
+        <div class="font-btn" data-field="tel1">🔤 Police Tel 1</div>
+        <div class="font-btn" data-field="tel2">🔤 Police Tel 2</div>
+        <div class="font-btn" data-field="site">🔤 Police Mail</div>
+        <div class="font-btn" data-field="mentions">🔤 Police Mentions</div>
+
+
+
+        <!-- Loader de polices -->
+        <input id="fontLoader" type="file" accept=".ttf" style="display:none;">
+    </div>
+    <div class="flexButton">
+        <div class="style-email-btn">📧 Style Email</div>
+        <div class="style-email-btn" onclick="window.location.href='../CarteVisite.html'">🥹Editeur lvl 1</div>
+    </div>
     <!-- ---------------- RECTO ---------------- -->
     <div class="card recto">
 
-        <div class="zone" data-id="1">
+        <div class="zone zone-1" data-id="1">
+            <span class="placeholder">Insérez votre image ici</span>
             <img src="">
             <input type="file" accept="image/*">
         </div>
 
-        <div class="zone" data-id="2">
+        <div class="zone zone-2" data-id="2">
+            <span class="placeholder">Insérez votre image ici</span>
             <img src="">
             <input type="file" accept="image/*">
         </div>
 
-        <div class="zone" data-id="3">
+        <div class="zone zone-3" data-id="3">
+            <span class="placeholder">Insérez votre image ici</span>
             <img src="">
             <input type="file" accept="image/*">
         </div>
 
-        <div class="zone" data-id="4">
+        <div class="zone zone-4" data-id="4">
+            <span class="placeholder">Insérez votre image ici</span>
             <img src="">
             <input type="file" accept="image/*">
         </div>
 
-        <div class="zone" data-id="5">
+        <div class="zone zone-5" data-id="5">
+            <span class="placeholder">Insérez votre image ici</span>
             <img src="">
             <input type="file" accept="image/*">
         </div>
@@ -180,98 +84,39 @@
     <!-- ---------------- VERSO ---------------- -->
     <div class="card verso">
 
-        <label class="upload-btn">
-            Choisir le fond (îles)
-            <input id="versoFile" type="file" accept="image/*">
-        </label>
-
         <div class="verso-bg"></div>
 
         <div class="verso-content">
 
             <div class="verso-inner">
 
-                <!-- 1 : Texte supplémentaire -->
-                <input id="extra" type="text" placeholder="Texte supplémentaire">
+                <!-- EXTRA -->
+                <textarea id="extra" maxlength="110" rows="3" placeholder="Texte supplémentaire"></textarea>
 
-                <!-- 2 : Téléphones côte à côte -->
+                <!-- TEL -->
                 <div class="tel-row">
-                    <input id="tel1" type="text" placeholder="Téléphone 1">
-                    <input id="tel2" type="text" placeholder="Téléphone 2">
+                    <label for="tel1">Tel 1 :</label>
+                    <input id="tel1" type="text">
+                    <label for="tel2">Tel 2 :</label>
+                    <input id="tel2" type="text">
                 </div>
 
-                <!-- 3 : Site web -->
-                <input id="site" type="text" placeholder="Site web">
+                <!-- MAIL -->
+                <div class="mail-row">
+                    <label for="site">Mail :</label>
+                    <input id="site" type="text">
+                </div>
 
             </div>
 
-            <!-- 4 : Mentions légales rehaussées -->
+            <!-- MENTIONS -->
             <div class="mentions-bottom">
-                <input id="mentions" type="text" placeholder="Mentions légales">
+                <textarea id="mentions" rows="2" placeholder="Mentions légales / SIRET"></textarea>
             </div>
 
         </div>
 
     </div>
-
-    <script>
-        /* ---------------- RECTO ---------------- */
-
-        document.querySelectorAll('.recto .zone').forEach(zone => {
-            const id = zone.dataset.id;
-            const img = zone.querySelector('img');
-            const fileInput = zone.querySelector('input[type="file"]');
-
-            const saved = localStorage.getItem("recto" + id);
-            if (saved) img.src = saved;
-
-            zone.addEventListener('click', () => fileInput.click());
-
-            fileInput.addEventListener('change', () => {
-                const file = fileInput.files[0];
-                if (!file) return;
-
-                const reader = new FileReader();
-                reader.onload = () => {
-                    img.src = reader.result;
-                    localStorage.setItem("recto" + id, reader.result);
-                };
-                reader.readAsDataURL(file);
-            });
-        });
-
-        /* ---------------- VERSO : FOND ---------------- */
-
-        const versoBg = document.querySelector(".verso-bg");
-        const versoFile = document.getElementById("versoFile");
-
-        const savedVersoBg = localStorage.getItem("versoBg");
-        if (savedVersoBg) versoBg.style.backgroundImage = `url(${savedVersoBg})`;
-
-        versoFile.addEventListener("change", () => {
-            const file = versoFile.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = () => {
-                versoBg.style.backgroundImage = `url(${reader.result})`;
-                localStorage.setItem("versoBg", reader.result);
-            };
-            reader.readAsDataURL(file);
-        });
-
-        /* ---------------- VERSO : TEXTES ---------------- */
-
-        ["tel1", "tel2", "site", "extra", "mentions"].forEach(key => {
-            const el = document.getElementById(key);
-            const saved = localStorage.getItem("verso_" + key);
-            if (saved) el.value = saved;
-
-            el.addEventListener("input", () =>
-                localStorage.setItem("verso_" + key, el.value)
-            );
-        });
-    </script>
 
 </body>
 
