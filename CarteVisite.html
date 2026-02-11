@@ -230,6 +230,11 @@
                 padding: 2px;
             }
         }
+
+        #input_temporaire {
+            width: 100% !important;
+            flex: 0 0 100% !important;
+        }
     </style>
 </head>
 
@@ -269,7 +274,6 @@
         </div>
     </div>
     <div class="boutons-action">
-        <button id="telecharger_carte" class="bouton bouton_action">Télécharger la carte de visite</button>
         <button id="imprimer_carte" class="bouton bouton_action">Imprimer la carte de visite</button>
         <button id="change_nom" class="bouton fond_rose">Changer le nom</button>
         <button id="change_titre" class="bouton fond_rose">Changer le titre</button>
@@ -277,6 +281,7 @@
         <button id="change_telephone" class="bouton fond_rose">Changer le numéro de téléphone</button>
         <button id="change_email" class="bouton fond_rose">Changer l'email</button>
         <button id="change_reseaux_sociaux" class="bouton fond_rose">Changer les réseaux sociaux</button>
+        <button id="btn_change_bg" class="bouton fond_rose">Changer fond</button>
         <button id="change_logo" class="bouton fond_rose">Changer le logo</button>
     </div>
     <div class="boutons-carrousel">
@@ -291,16 +296,17 @@
         <input type="file" id="uploadImageBas" accept="image/*">
     </div>
 
-<div class="boutons-police">
-    <button id="change_police_Nom" class="bouton">Haut Changer police du titre</button>
-    <button id="change_police_Titre" class="bouton">Haut Changer police du sous-titre</button>
-    <button id="change_police_Presentation" class="bouton">Haut Changer police du texte de présentation </button>
+    <div class="boutons-police">
+        <button id="change_police_Nom" class="bouton fond_rose">Haut Changer police du titre</button>
+        <button id="change_police_Titre" class="bouton fond_rose">Haut Changer police du sous-titre</button>
+        <button id="change_police_Presentation" class="bouton fond_rose">Haut Changer police du texte de présentation
+        </button>
 
-    <!-- 👉 AJOUT ICI -->
-    <button id="change_police_Telephone" class="bouton">Changer police du téléphone</button>
-    <button id="change_police_Email" class="bouton">Changer police de l'email</button>
-    <button id="change_police_Reseaux" class="bouton">Changer police des réseaux sociaux</button>
-</div>
+        <!-- 👉 AJOUT ICI -->
+        <button id="change_police_Telephone" class="bouton fond_rose">Changer police du téléphone</button>
+        <button id="change_police_Email" class="bouton fond_rose">Changer police de l'email</button>
+        <button id="change_police_Reseaux" class="bouton fond_rose">Changer police des réseaux sociaux</button>
+    </div>
 
 
 

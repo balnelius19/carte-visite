@@ -27,7 +27,7 @@ function creerInputAvecValidation(selectorElement, placeholder, maxLength = null
     const input = isTextarea ? document.createElement("textarea") : document.createElement("input");
     input.placeholder = placeholder;
     input.style.padding = "5px";
-    input.style.width = "250px";
+    input.style.width = "94vw";
 
     if (isTextarea) {
         input.style.height = "60px";
@@ -47,6 +47,7 @@ function creerInputAvecValidation(selectorElement, placeholder, maxLength = null
             element.textContent = input.value;
         }
         container.remove();
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     // Ajouter dans la page
@@ -57,6 +58,30 @@ function creerInputAvecValidation(selectorElement, placeholder, maxLength = null
 
     input.focus();
 }
+
+const couleurs = [
+    "#ffffff",
+    "#f8d7da",
+    "#d1ecf1",
+    "#d4edda",
+    "#fff3cd",
+    "#e2e3e5",
+    "#cce5ff",
+    "#f5c6cb",
+    "#c3e6cb",
+    "#ffeeba"
+];
+
+let indexCouleur = 0;
+
+document.getElementById("btn_change_bg").addEventListener("click", () => {
+    const canvas = document.querySelector(".canvas");
+
+    canvas.style.backgroundColor = couleurs[indexCouleur];
+
+    indexCouleur = (indexCouleur + 1) % couleurs.length; // boucle infinie
+});
+
 
 // Bouton : changer le titre
 document.getElementById("change_titre").addEventListener("click", () => {
@@ -313,9 +338,9 @@ const policesDispo = [
     "Marck Script",
 
     // --- 14 AUTRES ---
-    "Courier New",       // monospace
-    "Consolas",          // monospace
-    "Inconsolata",       // monospace
+    "Courier New",       
+    "Consolas",          
+    "Inconsolata",       
     "Impact",
     "Comic Sans MS",
     "Montserrat",
@@ -334,29 +359,28 @@ function changerPolice(sel) {
     if (document.getElementById("input_temporaire")) return;
 
     const el = document.querySelector(sel),
-          c = Object.assign(document.createElement("div"), { id:"input_temporaire" }),
-          s = document.createElement("select"),
-          b = document.createElement("button");
+        c = Object.assign(document.createElement("div"), { id: "input_temporaire" }),
+        s = document.createElement("select"),
+        b = document.createElement("button");
 
     Object.assign(c.style, {
-        width:"100%", flex:"0 0 100%", background:"#ff0000",
-        padding:"15px", marginTop:"10px", display:"flex",
-        flexDirection:"column", alignItems:"stretch",
-        gap:"10px", boxSizing:"border-box"
+        width: "100%", flex: "0 0 100%", background: "#ff0000",
+        padding: "15px", marginTop: "10px", display: "flex",
+        flexDirection: "column", alignItems: "stretch",
+        gap: "10px", boxSizing: "border-box"
     });
 
-    Object.assign(s.style, { padding:"10px", fontSize:"16px", width:"100%" });
+    Object.assign(s.style, { padding: "10px", fontSize: "16px", width: "100%" });
 
-    // 🔥 VERSION QUI MARCHE : création manuelle des options
     policesDispo.forEach(p => {
         const opt = document.createElement("option");
         opt.value = p;
         opt.textContent = p;
-        opt.style.fontFamily = p;   // ✔ fonctionne dans tous les navigateurs
+        opt.style.fontFamily = p;  
         s.appendChild(opt);
     });
 
-    Object.assign(b.style, { padding:"10px", fontSize:"16px", width:"100%" });
+    Object.assign(b.style, { padding: "10px", fontSize: "16px", width: "100%" });
     b.textContent = "Valider";
 
     b.onclick = () => {
@@ -368,7 +392,7 @@ function changerPolice(sel) {
     c.append(s, b);
     document.querySelector(".boutons-police").append(c);
 
-    setTimeout(() => c.scrollIntoView({ behavior:"smooth", block:"start" }), 50);
+    setTimeout(() => c.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
 }
 
 
