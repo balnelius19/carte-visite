@@ -36,16 +36,34 @@
         <div class="font-btn" data-field="tel2">🔤 Police Tel 2</div>
         <div class="font-btn" data-field="site">🔤 Police Mail</div>
         <div class="font-btn" data-field="mentions">🔤 Police Mentions</div>
+        <div class="font-btn-all">🔤 Police Globale</div>
+
+        <!-- BOUTONS TAILLE POLICE PAR CHAMP -->
+        <div class="size-btn" data-field="extra">🔠 Taille Extra</div>
+        <div class="size-btn" data-field="tel1">🔠 Taille Tel 1</div>
+        <div class="size-btn" data-field="tel2">🔠 Taille Tel 2</div>
+        <div class="size-btn" data-field="site">🔠 Taille Mail</div>
+        <div class="size-btn" data-field="mentions">🔠 Taille Mentions</div>
+        
+         <!-- BOUTONS organisation champ du bas -->
+        <div class="size-btn" data-field="modeTexte">🔠 footer texte</div>
+        <div class="size-btn" data-field="modeImage">🔠 footer image </div>
+        <div class="size-btn" data-field="modeImageGTexteD">🔠 footerMixte1</div>
+        <div class="size-btn" data-field="modeImageDTexteG">🔠 footerMixte2</div>
 
 
-
-        <!-- Loader de polices -->
+        <button id="printPDF">🖨️ export PDF</button>
         <input id="fontLoader" type="file" accept=".ttf" style="display:none;">
     </div>
-    <div class="flexButton">
+
+    <!-- BLOC DES BOUTONS MAIL -->
+    <div class="mail-tools">
         <div class="style-email-btn">📧 Style Email</div>
-        <div class="style-email-btn" onclick="window.location.href='../CarteVisite.html'">🥹Editeur lvl 1</div>
+        <button class="style-link-btn">Lien</button>
+        <button class="toggle-mail-label-btn">Cacher Mail</button>
+        <button class="toggle-tel2-btn">Cacher Tel 2</button>
     </div>
+
     <!-- ---------------- RECTO ---------------- -->
     <div class="card recto">
 
@@ -84,7 +102,8 @@
     <!-- ---------------- VERSO ---------------- -->
     <div class="card verso">
 
-        <div class="verso-bg"></div>
+        <!-- FOND RÉEL IMPRIMABLE -->
+        <img id="verso-bg-img" class="verso-bg" src="" alt="">
 
         <div class="verso-content">
 
@@ -96,7 +115,7 @@
                 <!-- TEL -->
                 <div class="tel-row">
                     <label for="tel1">Tel 1 :</label>
-                    <input id="tel1" type="text">
+                    <input id="tel1" type="text" placeholder="Téléphone">
                     <label for="tel2">Tel 2 :</label>
                     <input id="tel2" type="text">
                 </div>
@@ -109,9 +128,11 @@
 
             </div>
 
-            <!-- MENTIONS -->
+            <!-- MENTIONS (CONTENEUR POUR TEXTE / IMAGE / MIXTE) -->
             <div class="mentions-bottom">
                 <textarea id="mentions" rows="2" placeholder="Mentions légales / SIRET"></textarea>
+                <img id="mentions-img" src="" alt="Image Mentions"> <input id="mentions-file" type="file"
+                    accept="image/*">
             </div>
 
         </div>
