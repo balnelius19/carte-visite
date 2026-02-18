@@ -107,8 +107,8 @@ body {
     }
 
     /* Masquer tout sauf les cartes */
-    body * {
-        visibility: hidden !important;
+    body>*:not(.card) {
+        display: none !important;
     }
 
     .card {
